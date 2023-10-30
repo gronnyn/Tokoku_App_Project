@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"Module/config"
 	"Module/crud"
 	"Module/model"
 	"fmt"
@@ -27,11 +28,14 @@ func (as *AuthSystem) Login() (string, int) {
 	err := qry.Error
 
 	if err != nil {
+		config.CallClear()
 		fmt.Println("username / password salah.")
 		return user, 0
 	}
 	if user == "admin" {
+		config.CallClear()
 		return user, 1
 	}
+	config.CallClear()
 	return user, 2
 }

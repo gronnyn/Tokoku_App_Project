@@ -5,4 +5,5 @@ type Barang struct {
 	Nama        string
 	Harga       int
 	Stok_Barang int
+	Pegawai     string
 }
