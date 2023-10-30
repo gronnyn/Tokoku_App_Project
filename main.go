@@ -34,23 +34,24 @@ func main() {
 					fmt.Println("\n===============")
 					fmt.Println("Login as:", x)
 					fmt.Println("===============")
-					fmt.Println("\n1. Menambahkan User")
-					fmt.Println("2. Menambahkan Barang")
-					fmt.Println("\n3. Menghapus User")
-					fmt.Println("4. Menghapus Barang")
+					fmt.Println("\n1. Menambahkan Barang")
+					fmt.Println("2. Edit Informasi Barang")
+					fmt.Println("3. Update Stok Barang")
+					fmt.Println("\n4. Menambahkan Daftar Customer")
+					fmt.Println("5. Membuat Nota Transaksi")
 					fmt.Println("0. Logout")
 					fmt.Print("\n: ")
 					fmt.Scanln(&input)
 					if input == `0` {
 						break
 					} else if input == `1` {
-						crudSystem.TambahUser()
-					} else if input == `2` {
 						crudSystem.TambahBarang()
+					} else if input == `2` {
+						fmt.Println()
 					} else if input == `3` {
-						crudSystem.DelUsers()
+						crudSystem.UpdateBarang()
 					} else if input == `4` {
-						crudSystem.DelBarang()
+						crudSystem.TambahCustomer()
 					} else if input == `5` {
 						crudSystem.DelCustomer()
 					}
@@ -80,6 +81,7 @@ func main() {
 						crudSystem.TambahCustomer()
 					} else if input == `5` {
 					} else if input == `6` {
+						crudSystem.ListBarang()
 					}
 				}
 			}
