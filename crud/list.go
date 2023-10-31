@@ -19,7 +19,7 @@ func (as *CrudSystem) ListBarang() {
 	as.DB.Model(model.Barang{}).Select("stok_barang").Find(&stok)
 	as.DB.Model(model.Barang{}).Select("pegawai").Find(&pegawai)
 
-	fmt.Print("\nID , Nama Barang , Harga Stok , Barang")
+	fmt.Print("ID , Nama Barang , Harga Stok , Barang")
 	fmt.Println()
 	fmt.Println()
 	for i := 0; i < len(barang); i++ {
@@ -59,18 +59,19 @@ func (as *CrudSystem) ListCustomerNota(cust string) {
 	}
 }
 
-func (as *CrudSystem) ListUser() {
+func (as *CrudSystem) ListPegawai() {
 	var user []model.User
 	var listuser []string
 	as.DB.Select("username").Find(&user)
-	fmt.Println()
 	fmt.Println("\n===============")
-	fmt.Println(" List Pegawai")
+	fmt.Println("List Pegawai")
 	fmt.Println("===============")
+	fmt.Println()
 	as.DB.Model(model.User{}).Select("username").Find(&listuser)
 	for i := 0; i < len(listuser); i++ {
 		fmt.Println(listuser[i])
 	}
+	fmt.Println()
 }
 
 func (as *CrudSystem) ListNota() {
@@ -83,4 +84,5 @@ func (as *CrudSystem) ListNota() {
 	for i := 0; i < len(nota); i++ {
 		fmt.Println(nota[i])
 	}
+
 }

@@ -126,11 +126,11 @@ func (as *CrudSystem) TambahCustomer(pegawai string) {
 	}
 }
 
-func (as *CrudSystem) TambahUser() {
+func (as *CrudSystem) TambahPegawai() {
 	fmt.Println("\n===============")
 	fmt.Println("Pegawai Baru")
 	fmt.Println("===============")
-	as.ListUser()
+	as.ListPegawai()
 	var newUser = new(model.User)
 	fmt.Print("Username: ")
 	fmt.Scanln(&newUser.Username)

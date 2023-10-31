@@ -48,10 +48,8 @@ func (as *CrudSystem) EditNamaBarang(pegawai string) {
 
 	as.DB.Table("barangs").Where("ID = ?", kode).Update("nama", inputnama)
 
-	fmt.Println()
-	config.CallClear()
 	as.ListBarang()
-	fmt.Println("Nama barang kode dengan", kode, "berhasil diubah menjadi", inputnama)
+	fmt.Println("Nama barang dengan kode", kode, "berhasil diubah menjadi", inputnama)
 	fmt.Print("'press enter'")
 	fmt.Scanln()
 }

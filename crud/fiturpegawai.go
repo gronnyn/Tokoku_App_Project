@@ -8,20 +8,20 @@ import (
 func (as *CrudSystem) FiturPegawai(pegawai string) {
 	for {
 		config.CallClear()
+		input := ""
 		fmt.Println("\n===============")
 		fmt.Println("Login as:", pegawai)
 		fmt.Println("===============")
 		fmt.Println("\n===============")
 		fmt.Println("Fitur Pegawai")
 		fmt.Println("===============")
-		input := ""
 		fmt.Println("\n1. Menambahkan Barang Baru")
 		fmt.Println("2. Edit Informasi Barang")
 		fmt.Println("3. Update Stok Barang")
 		fmt.Println("\n4. Menambahkan Daftar Customer")
 		fmt.Println("\n5. Membuat Nota Transaksi")
 		fmt.Println("6. Membuat Transaksi")
-		fmt.Println("0. Menu Utama")
+		fmt.Println("\n0. Menu Utama")
 		fmt.Print("\n: ")
 		fmt.Scanln(&input)
 		if input == `1` {
@@ -47,8 +47,8 @@ func (as *CrudSystem) FiturPegawai(pegawai string) {
 				as.EditNamaBarang(pegawai)
 			} else if input == `2` {
 				as.EditHargaBarang(pegawai)
-			} else if input == `3` {
-
+			} else {
+				fmt.Println("Input Salah!")
 			}
 
 		} else if input == `3` {
@@ -61,6 +61,10 @@ func (as *CrudSystem) FiturPegawai(pegawai string) {
 			as.OrderPesanan(pegawai)
 		} else if input == `0` {
 			break
+		} else {
+			fmt.Println("Input Salah!")
+			fmt.Print("'press enter'")
+			fmt.Scanln()
 		}
 	}
 }

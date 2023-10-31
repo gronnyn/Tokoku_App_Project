@@ -10,7 +10,7 @@ import (
 func main() {
 	cfg, err := config.InitDB()
 
-	inputMenu := "0"
+	inputMenu := ""
 
 	if err != nil {
 		fmt.Println("failed connect to database", err.Error())
@@ -44,7 +44,11 @@ func main() {
 					if input == `0` {
 						break
 					} else if input == `1` {
-						crudSystem.TambahUser()
+						config.CallClear()
+						fmt.Println("\n===============")
+						fmt.Println("Login as:", x)
+						fmt.Println("===============")
+						crudSystem.TambahPegawai()
 					} else if input == `2` {
 						input := ""
 						fmt.Println("\n===============")
@@ -56,7 +60,7 @@ func main() {
 						fmt.Print("\n: ")
 						fmt.Scanln(&input)
 						if input == `1` {
-							crudSystem.ListUser()
+							crudSystem.ListPegawai()
 							crudSystem.DelUsers()
 						} else if input == `2` {
 							crudSystem.ListBarang()
@@ -71,30 +75,9 @@ func main() {
 						}
 					} else if input == `3` {
 						crudSystem.FiturPegawai(x)
-					} else if input == `4` {
-						crudSystem.TambahCustomer(x)
-					} else if input == `5` {
-						crudSystem.OrderPesanan(x)
-					} else if input == `6` {
-						crudSystem.NotaTransaksi(x)
-					} else if input == `7` {
-						crudSystem.DelCustomer()
-					} else if input == `99` {
-						input := ""
-						fmt.Println("1. Nama Barang")
-						fmt.Println("2. Harga Barang")
-						fmt.Println("3. Stok Barang")
-						fmt.Scanln(&input)
-						if input == `1` {
-							crudSystem.EditNamaBarang(x)
-						} else if input == `2` {
-							crudSystem.EditHargaBarang(x)
-						} else if input == `3` {
-							crudSystem.EditStokBarang(x)
-						}
 					} else {
 						fmt.Println("Input Salah!")
-						fmt.Print("\n''press enter''")
+						fmt.Print("''press enter''")
 						fmt.Scanln()
 					}
 					config.CallClear()
@@ -103,29 +86,22 @@ func main() {
 				for {
 					input := ""
 					fmt.Println("\n===============")
-					fmt.Println("Login as: ", x)
+					fmt.Println("Login as:", x)
 					fmt.Println("===============")
-					fmt.Println("\n1. Menambahkan Barang")
-					fmt.Println("2. Edit Informasi Barang")
-					fmt.Println("3. Update Stok Barang")
-					fmt.Println("\n4. Menambahkan Daftar Customer")
-					fmt.Println("5. Membuat Nota Transaksi")
+					fmt.Println("\n1. Fitur Pegawai")
 					fmt.Println("0. Logout")
 					fmt.Print("\n: ")
 					fmt.Scanln(&input)
-					if input == `0` {
+					if input == `1` {
+						crudSystem.FiturPegawai(x)
+					} else if input == `0` {
 						break
-					} else if input == `1` {
-						crudSystem.TambahBarang(x)
-					} else if input == `2` {
-					} else if input == `3` {
-
-					} else if input == `4` {
-						crudSystem.TambahCustomer(x)
-					} else if input == `5` {
-					} else if input == `6` {
-						crudSystem.ListBarang()
+					} else {
+						fmt.Println("Input Salah!")
+						fmt.Print("''press enter''")
+						fmt.Scanln()
 					}
+					config.CallClear()
 				}
 			}
 		} else if inputMenu == `0` {
