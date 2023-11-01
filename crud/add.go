@@ -102,7 +102,7 @@ func (as *CrudSystem) TambahCustomer(pegawai string) {
 	}
 	fmt.Print("Alamat Customer: ")
 	inputalamat, _ := reader.ReadString('\n')
-	inputnama = strings.TrimSpace(inputnama)
+	inputalamat = strings.TrimSpace(inputalamat)
 	newUser.Alamat_Customer = inputalamat
 	if newUser.Alamat_Customer == "" {
 		fmt.Println("Alamat tidak boleh kosong!")
@@ -112,18 +112,20 @@ func (as *CrudSystem) TambahCustomer(pegawai string) {
 	}
 
 	err := as.DB.Table("customers").Create(newUser).Error
-	as.DB.Table("customers_backup").Create(newUser)
 
 	if err != nil {
 		fmt.Println("gagal")
 		fmt.Print("'press enter'")
 		fmt.Scanln()
 		return
-	} else {
-		fmt.Println("\nCustomer " + newUser.Nama + " berhasil ditambahkan.")
-		fmt.Print("'press enter'")
-		fmt.Scanln()
 	}
+
+	as.DB.Table("customers_backup").Create(newUser)
+	as.ListCustomer()
+	fmt.Println("\nCustomer " + newUser.Nama + " berhasil ditambahkan.")
+	fmt.Print("'press enter'")
+	fmt.Scanln()
+
 }
 
 func (as *CrudSystem) TambahPegawai() {
@@ -150,6 +152,7 @@ func (as *CrudSystem) TambahPegawai() {
 		fmt.Print("'press enter'")
 		fmt.Scanln()
 	} else {
+		as.ListPegawai()
 		fmt.Println("\nPegawai", newUser.Username, "berhasil ditambah.")
 		fmt.Print("'press enter'")
 		fmt.Scanln()

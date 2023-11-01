@@ -1,19 +1,46 @@
 package crud
 
 import (
+	"Module/config"
 	"Module/model"
 	"fmt"
 )
 
 func (as *CrudSystem) NotaTransaksi(pegawai string) {
-
-	// as.DB.Joins("JOIN barangs ON barangs.ID = nota_transactions.barang_id").Where("customer_id = ?", id).Find(&Nota)
+	var isNotaExist int
+	as.DB.Model(model.Nota_Transactions{}).Select("ID").Find(&isNotaExist)
+	if isNotaExist == 0 {
+		fmt.Println("Tidak ada yang pesan.")
+		fmt.Print("'press enter'")
+		fmt.Scanln()
+		config.CallClear()
+		return
+	}
 
 	as.ListCustomer()
 	fmt.Print("\nID customer: ")
 	var id int
 	fmt.Scanln(&id)
 
+	var isCust int
+	as.DB.Model(model.Customer{}).Select("id = ?", id).Where("id = ?", id).Find(&isCust)
+	if isCust == 0 {
+		fmt.Println("Costumer tidak ada.")
+		fmt.Println("''press enter")
+		fmt.Scanln()
+		config.CallClear()
+		return
+	}
+	var ListNota int
+	as.DB.Model(model.Nota_Transactions{}).Select("customer_id = ?", id).Where("customer_id = ?", id).Find(&ListNota)
+	fmt.Println(ListNota)
+	if ListNota == 0 {
+		fmt.Println("Costumer belum pesan.")
+		fmt.Println("''press enter")
+		fmt.Scanln()
+		config.CallClear()
+		return
+	}
 	var barangID []int
 	as.DB.Model(model.Nota_Transactions{}).Select("barang_id").Where("customer_id = ?", id).Find(&barangID)
 
@@ -63,17 +90,13 @@ func (as *CrudSystem) NotaTransaksi(pegawai string) {
 		hargatotal += qty[i] * listpembelian[i]
 	}
 	as.DB.Model(model.Barang{}).Select("stok_barang")
-	if hargatotal == 0 {
-		fmt.Println("sudah lunas")
-		fmt.Print("''press enter''")
-		fmt.Scanln()
-		return
-	}
+	// if hargatotal == 0 {
+	// 	fmt.Println("sudah lunas")
+	// 	fmt.Print("''press enter''")
+	// 	fmt.Scanln()
+	// 	return
+	// }
 	fmt.Println("===============")
-	fmt.Print("Customer: ", customer)
-	fmt.Println()
-	fmt.Print("Alamat\t: ", alamat)
-	fmt.Println()
 	fmt.Print("Pegawai\t: ", pegawai)
 	fmt.Println("\n===============")
 	fmt.Println("\nPesanan\t:")
@@ -95,8 +118,7 @@ func (as *CrudSystem) NotaTransaksi(pegawai string) {
 		for i := 0; i < len(barangID); i++ {
 			as.DelNota(id)
 		}
-
-		as.ListBarang()
+		as.DelCustomerNota(id)
 		fmt.Println("Terima kasih!")
 		fmt.Print("''press enter''")
 		fmt.Scanln()

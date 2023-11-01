@@ -31,16 +31,18 @@ func (as *CrudSystem) ListCustomer() {
 	fmt.Println("\n===============")
 	fmt.Println("List Costumer")
 	fmt.Println("===============")
-	var customer []model.Customer
+	// var customer []model.Customer
 	var id, nama, alamat []string
-	as.DB.Find(&customer)
+	// as.DB.Find(&customer)
+
 	as.DB.Model(model.Customer{}).Select("nama").Find(&nama)
 	as.DB.Model(model.Customer{}).Select("alamat_customer").Find(&alamat)
 	as.DB.Model(model.Customer{}).Select("ID").Find(&id)
 
-	fmt.Print("\nID , Nama , Alamat")
+	fmt.Print("ID , Nama , Alamat")
 	fmt.Println()
-	for i := 0; i < len(customer); i++ {
+	fmt.Println()
+	for i := 0; i < len(id); i++ {
 		fmt.Println(id[i], ",", nama[i], ",", alamat[i])
 	}
 }
@@ -84,5 +86,4 @@ func (as *CrudSystem) ListNota() {
 	for i := 0; i < len(nota); i++ {
 		fmt.Println(nota[i])
 	}
-
 }

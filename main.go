@@ -50,7 +50,11 @@ func main() {
 						fmt.Println("===============")
 						crudSystem.TambahPegawai()
 					} else if input == `2` {
+						config.CallClear()
 						input := ""
+						fmt.Println("\n===============")
+						fmt.Println("Login as:", x)
+						fmt.Println("===============")
 						fmt.Println("\n===============")
 						fmt.Println("Hapus Data")
 						fmt.Println("===============")
@@ -89,7 +93,7 @@ func main() {
 					fmt.Println("Login as:", x)
 					fmt.Println("===============")
 					fmt.Println("\n1. Fitur Pegawai")
-					fmt.Println("0. Logout")
+					fmt.Println("\n0. Logout")
 					fmt.Print("\n: ")
 					fmt.Scanln(&input)
 					if input == `1` {

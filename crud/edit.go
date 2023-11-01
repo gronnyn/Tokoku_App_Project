@@ -49,7 +49,7 @@ func (as *CrudSystem) EditNamaBarang(pegawai string) {
 	as.DB.Table("barangs").Where("ID = ?", kode).Update("nama", inputnama)
 
 	as.ListBarang()
-	fmt.Println("Nama barang dengan kode", kode, "berhasil diubah menjadi", inputnama)
+	fmt.Println("\nNama barang dengan kode", kode, "berhasil diubah menjadi", inputnama)
 	fmt.Print("'press enter'")
 	fmt.Scanln()
 }
@@ -69,13 +69,13 @@ func (as *CrudSystem) EditHargaBarang(pegawai string) {
 	fmt.Println("Edit Nama Barang")
 	fmt.Println("===============")
 	as.ListBarang()
-	var currentUser = new(model.Barang)
+	var currentBarang = new(model.Barang)
 	var kode, harga int
 
 	fmt.Print("\nKode Barang: ")
 	fmt.Scanln(&kode)
 
-	qry := as.DB.Table("barangs").Where("ID = ?", kode).Take(&currentUser)
+	qry := as.DB.Table("barangs").Where("ID = ?", kode).Take(&currentBarang)
 
 	err := qry.Error
 
@@ -86,13 +86,14 @@ func (as *CrudSystem) EditHargaBarang(pegawai string) {
 		return
 	}
 
-	fmt.Print("Harga: ")
+	fmt.Print(currentBarang.Harga, " > ")
 	fmt.Scanln(&harga)
 	as.DB.Table("barangs").Where("ID = ?", kode).Update("harga", harga)
 
 	fmt.Println()
-	config.CallClear()
+
 	as.ListBarang()
+	fmt.Println("\nHarga barang dengan kode", kode, "berhasil diubah dari", currentBarang.Harga, "menjadi", harga)
 	fmt.Print("'press enter'")
 	fmt.Scanln()
 }
@@ -128,12 +129,16 @@ func (as *CrudSystem) EditStokBarang(pegawai string) {
 
 	fmt.Print(currentUser.Stok_Barang, " > ")
 	fmt.Scanln(&stok)
+	if stok <= 0 {
+		fmt.Println("Stok barang tidak boleh 0 atau minus!")
+		fmt.Print("'press enter'")
+		fmt.Scanln()
+		return
+	}
 	as.DB.Table("barangs").Where("ID = ?", kode).Update("stok_barang", stok)
 
-	fmt.Println()
-	config.CallClear()
 	as.ListBarang()
-	fmt.Println("Stok barang dengan kode", kode, "berhasil diubah dari ", currentUser.Stok_Barang, "menjadi", stok)
+	fmt.Println("\nStok barang dengan kode", kode, "berhasil diubah dari ", currentUser.Stok_Barang, "menjadi", stok)
 	fmt.Print("'press enter'")
 	fmt.Scanln()
 }
