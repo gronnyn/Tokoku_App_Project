@@ -9,7 +9,6 @@ import (
 func (as *CrudSystem) OrderPesanan(pegawai string) {
 	var isCust int
 	as.DB.Model(model.Customer{}).Select("ID").Find(&isCust)
-	fmt.Println(isCust)
 	if isCust == 0 {
 		fmt.Println("Customer tidak ada.")
 		fmt.Print("'press enter'")
@@ -73,6 +72,7 @@ func (as *CrudSystem) OrderPesanan(pegawai string) {
 
 	x := stok_barang - newTransactions.Qty
 	as.DB.Model(model.Barang{}).Where("ID = ?", newTransactions.Barang_ID).Update("stok_barang", x)
+	as.ListBarang()
 	as.DB.Table("nota_transactions_backup").Create(newTransactions)
 	fmt.Println("\nPesanan atas customer dengan ID", newTransactions.Customer_ID, "berhasil dibuat.")
 	fmt.Print("'press enter'")

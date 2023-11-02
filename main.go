@@ -10,14 +10,17 @@ import (
 func main() {
 	cfg, err := config.InitDB()
 
-	inputMenu := ""
-
 	if err != nil {
-		fmt.Println("failed connect to database", err.Error())
+		fmt.Println("failed connect to database")
+		fmt.Print("'press enter'")
+		fmt.Scanln()
+		return
 	}
 
 	var authSystem = auth.AuthSystem{DB: cfg}
 	var crudSystem = crud.CrudSystem{DB: cfg}
+
+	inputMenu := ""
 	for {
 		config.CallClear()
 		fmt.Printf("\t\tTokoku Project Start")
@@ -50,32 +53,37 @@ func main() {
 						fmt.Println("===============")
 						crudSystem.TambahPegawai()
 					} else if input == `2` {
-						config.CallClear()
-						input := ""
-						fmt.Println("\n===============")
-						fmt.Println("Login as:", x)
-						fmt.Println("===============")
-						fmt.Println("\n===============")
-						fmt.Println("Hapus Data")
-						fmt.Println("===============")
-						fmt.Println("\n1. Pegawai")
-						fmt.Println("2. Barang")
-						fmt.Println("3. Customer")
-						fmt.Print("\n: ")
-						fmt.Scanln(&input)
-						if input == `1` {
-							crudSystem.ListPegawai()
-							crudSystem.DelUsers()
-						} else if input == `2` {
-							crudSystem.ListBarang()
-							crudSystem.DelBarang()
-						} else if input == `3` {
-							crudSystem.ListCustomer()
-							crudSystem.DelCustomer()
-						} else {
-							fmt.Print("\nInput Salah!")
-							fmt.Print("\n'press enter")
-							fmt.Scanln()
+						for {
+							config.CallClear()
+							input := ""
+							fmt.Println("\n===============")
+							fmt.Println("Login as:", x)
+							fmt.Println("===============")
+							fmt.Println("\n===============")
+							fmt.Println("Hapus Data")
+							fmt.Println("===============")
+							fmt.Println("\n1. Pegawai")
+							fmt.Println("2. Barang")
+							fmt.Println("3. Customer")
+							fmt.Println("\n0. Back")
+							fmt.Print("\n: ")
+							fmt.Scanln(&input)
+							if input == `1` {
+								crudSystem.ListPegawai()
+								crudSystem.DelUsers()
+							} else if input == `2` {
+								crudSystem.ListBarang()
+								crudSystem.DelBarang()
+							} else if input == `3` {
+								crudSystem.ListCustomer()
+								crudSystem.DelCustomer()
+							} else if input == `0` {
+								break
+							} else {
+								fmt.Print("\nInput Salah!")
+								fmt.Print("\n'press enter'")
+								fmt.Scanln()
+							}
 						}
 					} else if input == `3` {
 						crudSystem.FiturPegawai(x)

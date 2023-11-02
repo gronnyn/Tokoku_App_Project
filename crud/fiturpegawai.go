@@ -20,8 +20,9 @@ func (as *CrudSystem) FiturPegawai(pegawai string) {
 		fmt.Println("3. Update Stok Barang")
 		fmt.Println("\n4. Menambahkan Daftar Customer")
 		fmt.Println("\n5. Membuat Nota Transaksi")
-		fmt.Println("6. Membuat Pesanan")
-		fmt.Println("\n0. Menu Utama")
+		fmt.Println("\n6. Membuat Pesanan")
+		fmt.Println("7. Tampilkan Data")
+		fmt.Println("\n0. Back")
 		fmt.Print("\n: ")
 		fmt.Scanln(&input)
 		if input == `1` {
@@ -64,6 +65,46 @@ func (as *CrudSystem) FiturPegawai(pegawai string) {
 			as.NotaTransaksi(pegawai)
 		} else if input == `6` {
 			as.OrderPesanan(pegawai)
+		} else if input == `7` {
+			for {
+				config.CallClear()
+				input := ""
+				fmt.Println("\n===============")
+				fmt.Println("Login as:", pegawai)
+				fmt.Println("===============")
+				fmt.Println("\n===============")
+				fmt.Println("Fitur Pegawai")
+				fmt.Println("===============")
+				fmt.Println("\n===============")
+				fmt.Println("Tampilkan Data")
+				fmt.Println("===============")
+				fmt.Println("\n1. Barang")
+				fmt.Println("2. Customer")
+				fmt.Println("3. Pesanan")
+				fmt.Println("\n0. Back")
+				fmt.Print("\n: ")
+				fmt.Scanln(&input)
+
+				if input == `1` {
+					as.ListBarang()
+					fmt.Print("'press enter'")
+					fmt.Scanln()
+				} else if input == `2` {
+					as.ListCustomer()
+					fmt.Print("'press enter'")
+					fmt.Scanln()
+				} else if input == `0` {
+					break
+				} else if input == `3` {
+					as.ListNota()
+					fmt.Print("'press enter")
+					fmt.Scanln()
+				} else {
+					fmt.Println("Input salah!")
+					fmt.Print("'press enter")
+					fmt.Scanln()
+				}
+			}
 		} else if input == `0` {
 			break
 		} else {

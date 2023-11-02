@@ -73,7 +73,6 @@ func (as *CrudSystem) ListPegawai() {
 	for i := 0; i < len(listuser); i++ {
 		fmt.Println(listuser[i])
 	}
-	fmt.Println()
 }
 
 func (as *CrudSystem) ListNota() {

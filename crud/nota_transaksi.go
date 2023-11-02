@@ -26,17 +26,16 @@ func (as *CrudSystem) NotaTransaksi(pegawai string) {
 	as.DB.Model(model.Customer{}).Select("id = ?", id).Where("id = ?", id).Find(&isCust)
 	if isCust == 0 {
 		fmt.Println("Costumer tidak ada.")
-		fmt.Println("''press enter")
+		fmt.Print("'press enter'")
 		fmt.Scanln()
 		config.CallClear()
 		return
 	}
 	var ListNota int
 	as.DB.Model(model.Nota_Transactions{}).Select("customer_id = ?", id).Where("customer_id = ?", id).Find(&ListNota)
-	fmt.Println(ListNota)
 	if ListNota == 0 {
 		fmt.Println("Costumer belum pesan.")
-		fmt.Println("''press enter")
+		fmt.Print("'press enter'")
 		fmt.Scanln()
 		config.CallClear()
 		return
@@ -90,12 +89,6 @@ func (as *CrudSystem) NotaTransaksi(pegawai string) {
 		hargatotal += qty[i] * listpembelian[i]
 	}
 	as.DB.Model(model.Barang{}).Select("stok_barang")
-	// if hargatotal == 0 {
-	// 	fmt.Println("sudah lunas")
-	// 	fmt.Print("''press enter''")
-	// 	fmt.Scanln()
-	// 	return
-	// }
 	fmt.Println("===============")
 	fmt.Print("Pegawai\t: ", pegawai)
 	fmt.Println("\n===============")
