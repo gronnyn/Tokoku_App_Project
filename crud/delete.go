@@ -85,14 +85,6 @@ func (as *CrudSystem) DelCustomerNota(customer int) {
 		return
 	}
 	as.DB.Table("customers").Where("ID = ?", customer).Delete(&currentUser)
-	// err2 := qry2.Error
-
-	// if err2 != nil {
-	// 	fmt.Println("Customer", currentUser.Nama, "belum bayar.")
-	// 	fmt.Print("'press enter'")
-	// 	fmt.Scanln()
-	// 	return
-	// }
 }
 
 func (as *CrudSystem) DelUsers() {

@@ -31,9 +31,7 @@ func (as *CrudSystem) ListCustomer() {
 	fmt.Println("\n===============")
 	fmt.Println("List Costumer")
 	fmt.Println("===============")
-	// var customer []model.Customer
 	var id, nama, alamat []string
-	// as.DB.Find(&customer)
 
 	as.DB.Model(model.Customer{}).Select("nama").Find(&nama)
 	as.DB.Model(model.Customer{}).Select("alamat_customer").Find(&alamat)
@@ -47,11 +45,9 @@ func (as *CrudSystem) ListCustomer() {
 	}
 }
 
-func (as *CrudSystem) ListCustomerNota(cust string) {
+func (as *CrudSystem) ListCustomrNota(cust string) {
 	var customer []model.Customer
-	// fmt.Print(nota)
 	as.DB.Find(&customer).Where("ID = nota_transactions.customer_id")
-	// as.DB.Model(model.Nota_Transactions{}).Select("barang_id").Where("customer_id = ?", id).Find(&cust)
 	fmt.Print(customer)
 	fmt.Print("\n{ID, Nama, Alamat}")
 	fmt.Println()
@@ -77,12 +73,18 @@ func (as *CrudSystem) ListPegawai() {
 
 func (as *CrudSystem) ListNota() {
 	var nota []model.Nota_Transactions
-
 	as.DB.Find(&nota)
-	fmt.Print("\n{ID, username, ID Barang, Total Barang, ID Customer}")
+
+	fmt.Print("\n{username, ID Barang, Total Barang, ID Customer}")
 	fmt.Println()
 	fmt.Println()
+	var username []string
+	var barang_id, qty, customer_id []int
+	as.DB.Model(model.Nota_Transactions{}).Select("username").Find(&username)
+	as.DB.Model(model.Nota_Transactions{}).Select("barang_id").Find(&barang_id)
+	as.DB.Model(model.Nota_Transactions{}).Select("qty").Find(&qty)
+	as.DB.Model(model.Nota_Transactions{}).Select("customer_id").Find(&customer_id)
 	for i := 0; i < len(nota); i++ {
-		fmt.Println(nota[i])
+		fmt.Println(username[i], ",", barang_id[i], ",", qty[i], ",", customer_id[i])
 	}
 }
