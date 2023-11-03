@@ -4,6 +4,7 @@ import (
 	"Module/config"
 	"Module/model"
 	"fmt"
+	"time"
 )
 
 func (as *CrudSystem) NotaTransaksi(pegawai string) {
@@ -94,14 +95,16 @@ func (as *CrudSystem) NotaTransaksi(pegawai string) {
 	fmt.Println("\n===============")
 	fmt.Println("\nPesanan\t:")
 	fmt.Println()
-	fmt.Println("Total\t Barang\t\t Harga_Satuan\t Harga_Total\t Waktu Pemesanan")
+	fmt.Println("Total\t Barang\t\t Harga_Satuan\t Harga_Total")
 	fmt.Println()
 	for i := 0; i < len(nama_barang); i++ {
-		fmt.Println(qty[i], "\t", nama_barang[i], "\t", listpembelian[i], "\t\t", listpembelian[i]*qty[i], "\t\t", created_at[i])
+		fmt.Println(qty[i], "\t", nama_barang[i], "\t", listpembelian[i], "\t\t", listpembelian[i]*qty[i])
 	}
 	fmt.Println()
 	fmt.Println("\n===============")
-	fmt.Print("Costumer: ", customer, " \nAlamat  : ", alamat, "\nTotal   : ", hargatotal)
+	ttl := time.Now()
+	y, m, d := ttl.Date()
+	fmt.Print("Pegawai : ", pegawai, "\nCostumer: ", customer, " \nAlamat  : ", alamat, "\nTotal   : ", hargatotal, "\nTanggal : ", d, m, y)
 	fmt.Println("\n===============")
 	fmt.Print("\nSudah bayar(y/n): ")
 	var bayar string
